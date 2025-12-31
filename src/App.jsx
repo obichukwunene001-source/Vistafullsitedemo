@@ -4,7 +4,6 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
-import NoPage from "./pages/NoPage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Testimonials from "./pages/Testimonials";

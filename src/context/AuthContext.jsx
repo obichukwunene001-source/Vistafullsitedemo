@@ -22,12 +22,35 @@ export const AuthProvider = ({ children }) => {
     return () => listener.subscription.unsubscribe();
   }, []);
 
+  // Signup
+  const signup = async (email, password) => {
+    const { data, error } = await supabase.auth.signUp({ email, password });
+    return { data, error };
+  };
+
+  // Login
+  const login = async (email, password) => {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    return { data, error };
+  };
+
+  // Login with Google
+  const loginWithGoogle = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({ provider: "google" });
+    return { data, error };
+  };
+
+  // Logout
+  const logout = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading }}>
+    <AuthContext.Provider value={{ user, loading, signup, login, loginWithGoogle, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Hook to access auth anywhere
 export const useAuth = () => useContext(AuthContext);

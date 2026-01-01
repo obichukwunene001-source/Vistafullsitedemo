@@ -7,50 +7,59 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const redirectTo = (import.meta.env.MODE === 'development' ? window.location.origin : import.meta.env.VITE_REDIRECT_URL) || window.location.origin;
+
   useEffect(() => {
-    // Check if a session exists on page load
-    supabase.auth.getSession().then(({ data }) => {
+    // Handle OAuth redirect (parse session from URL if present), then get current session
+    const initAuth = async () => {
+      console.debug('[Auth] initAuth start, url:', window.location.href);
+      try {
+        // After OAuth redirect Supabase puts session params in the URL; parse them first
+        const resp = await supabase.auth.getSessionFromUrl().catch((err) => ({ error: err }));
+        console.debug('[Auth] getSessionFromUrl response:', resp);
+      } catch (err) {
+        console.warn('[Auth] getSessionFromUrl threw:', err);
+      }
+
+      const { data } = await supabase.auth.getSession();
+      console.debug('[Auth] getSession current session:', data);
       setUser(data?.session?.user ?? null);
+      setLoading(false);
+    };
+
+    initAuth();
+
+    // Listen for auth state changes
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      console.debug('[Auth] onAuthStateChange event:', event, 'session:', session);
+      setUser(session?.user ?? null);
       setLoading(false);
     });
 
-    // Listen for login/logout events
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => listener.subscription.unsubscribe();
+    return () => authListener.subscription.unsubscribe();
   }, []);
 
-  // Signup
-  // Use an env var for redirects so staging/production can differ from local dev
-  // NOTE: Also add your production URL to Supabase Auth redirect URLs / SITE_URL in the dashboard
   const signup = async (email, password) => {
-    const redirectTo = import.meta.env.VITE_REDIRECT_URL || window.location.origin;
     const { data, error } = await supabase.auth.signUp(
       { email, password },
       { options: { emailRedirectTo: redirectTo } }
     );
     return { data, error };
-  }
+  };
 
-  // Login
   const login = async (email, password) => {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     return { data, error };
   };
 
-  // Login with Google
   const loginWithGoogle = async () => {
-    // Provide a redirectTo so Supabase redirects back to our app after OAuth
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: window.location.origin }
+      options: { redirectTo }
     });
     return { data, error };
   };
 
-  // Logout
   const logout = async () => {
     await supabase.auth.signOut();
     setUser(null);

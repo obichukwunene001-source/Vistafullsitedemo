@@ -19,14 +19,11 @@ const Signup = () => {
       alert("Passwords do not match");
       return;
     }
-
     setLoading(true);
     const { error } = await signup(email, password);
     setLoading(false);
-
-    if (error) {
-      alert(error.message);
-    } else {
+    if (error) alert(error.message);
+    else {
       alert("Check your email to confirm your account!");
       navigate("/login");
     }
@@ -36,21 +33,19 @@ const Signup = () => {
     <div className="min-h-screen bg-gray-50 flex items-start md:pt-20 px-1 py-12 -ml-3 md:-ml-7">
       <div className="max-w-7xl mx-auto w-full px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Left: form */}
           <div className="max-w-md">
             <h1 className="text-4xl font-semibold mb-3">Create an account</h1>
             <p className="text-sm text-gray-600 mb-8">Join us to access tutorials and services</p>
-
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label className="block text-xs text-gray-600 mb-2">Email</label>
                 <input
                   type="email"
-                  className="w-full border-b border-gray-200 bg-transparent py-2 outline-none text-black placeholder-gray-400 caret-black focus:ring-0"
-                  placeholder="name@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  className="w-full border-b border-gray-200 bg-transparent py-2 outline-none text-black placeholder-gray-400 caret-black focus:ring-0"
+                  placeholder="name@example.com"
                 />
               </div>
 
@@ -58,11 +53,11 @@ const Signup = () => {
                 <label className="block text-xs text-gray-600 mb-2">Password</label>
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="w-full border-b border-gray-200 bg-transparent py-2 pr-10 outline-none text-black placeholder-gray-400 caret-black focus:ring-0"
-                  placeholder="Choose a password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  className="w-full border-b border-gray-200 bg-transparent py-2 pr-10 outline-none text-black placeholder-gray-400 caret-black focus:ring-0"
+                  placeholder="Choose a password"
                 />
                 <button
                   type="button"
@@ -77,11 +72,11 @@ const Signup = () => {
                 <label className="block text-xs text-gray-600 mb-2">Confirm password</label>
                 <input
                   type={showConfirm ? "text" : "password"}
-                  className="w-full border-b border-gray-200 bg-transparent py-2 pr-10 outline-none text-black placeholder-gray-400 caret-black focus:ring-0"
-                  placeholder="Confirm your password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
+                  className="w-full border-b border-gray-200 bg-transparent py-2 pr-10 outline-none text-black placeholder-gray-400 caret-black focus:ring-0"
+                  placeholder="Confirm your password"
                 />
                 <button
                   type="button"
@@ -94,8 +89,8 @@ const Signup = () => {
 
               <button
                 type="submit"
-                className="mt-4 w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full py-3 font-medium"
                 disabled={loading}
+                className="mt-4 w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full py-3 font-medium"
               >
                 {loading ? "Creating account..." : "Create account"}
               </button>
@@ -106,7 +101,6 @@ const Signup = () => {
             </form>
           </div>
 
-          {/* Right: testimonial */}
           <div className="hidden md:flex flex-col items-start justify-center px-8">
             <div className="flex items-center mb-4">
               <div className="flex text-orange-500 text-xl mr-3">★★★★★</div>

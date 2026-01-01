@@ -14,9 +14,7 @@ function App() {
       <Navbar />
       <main className="pt-24 pl-4">
         <Routes>
-          {/* FORCE ROOT TO HOME */}
           <Route path="/" element={<Navigate to="/home" replace />} />
-
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
@@ -24,8 +22,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/testimonials" element={<Testimonials />} />
-
-          {/* FALLBACK */}
           <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
       </main>

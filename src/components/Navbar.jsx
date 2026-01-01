@@ -3,12 +3,17 @@ import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import logo from '../assets/logo.jpg';
 import { useAuth } from '../context/AuthContext';
-import { supabase } from '../lib/supabase';
 
 const Navbar = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth(); // use logout from context
   const [isOpen, setIsOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+
+  const handleLogout = async () => {
+    await logout();          // updates context user state
+    setProfileOpen(false);   // close dropdown
+    setIsOpen(false);        // close mobile menu if open
+  };
 
   return (
     <header className="text-black font-semibold fixed z-50 w-full top-0 bg-white shadow">
@@ -44,10 +49,7 @@ const Navbar = () => {
                 {user && (
                   <button
                     className="w-full text-left px-4 py-2 hover:bg-orange-50"
-                    onClick={async () => {
-                      await supabase.auth.signOut();
-                      setProfileOpen(false);
-                    }}
+                    onClick={handleLogout}
                   >
                     Logout
                   </button>
@@ -76,14 +78,7 @@ const Navbar = () => {
             </>
           )}
           {user && (
-            <button
-              onClick={async () => {
-                await supabase.auth.signOut();
-                setIsOpen(false);
-              }}
-            >
-              Logout
-            </button>
+            <button onClick={handleLogout}>Logout</button>
           )}
         </nav>
       )}

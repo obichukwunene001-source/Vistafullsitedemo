@@ -45,7 +45,6 @@ const Home = () => {
       </section>
       <Globalbrands />
       <What />
-
       <Services />
     </>
   );

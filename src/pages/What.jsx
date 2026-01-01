@@ -1,7 +1,7 @@
 
 const What = () => {
   return (
-    <section className="bg-gray-50 py-14 -ml-4">
+    <section className="bg-gray-50 py-14 pb-20 -ml-4">
       <div className="max-w-6xl mx-auto px-4">
         <header className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-semibold text-gray-900">What clients say</h2>

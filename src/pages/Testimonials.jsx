@@ -38,7 +38,7 @@ const data = [
 const Testimonials = () => {
   return (
     <>
-    <section className="min-h-screen bg-gray-50 py-16 md:-ml-7 -ml-7">
+    <section className="min-h-screen bg-gray-50 py-16 -mb-40  md:-ml-7 -ml-7">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold">Results matter</h2>

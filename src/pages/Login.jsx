@@ -9,7 +9,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-start py-12 px-3 -ml-7 md:-ml-7">
+    <div className="min-h-screen bg-gray-50 flex items-start md:pt-20 py-12 px-3 -ml-7 md:-ml-7">
       <div className="max-w-7xl mx-auto w-full px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left: form */}

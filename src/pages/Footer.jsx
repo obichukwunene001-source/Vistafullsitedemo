@@ -3,11 +3,11 @@
 import React from 'react'
 
 const columns = {
-  Explore: ['Home', 'About', 'Bookings', 'Membership', 'Account'],
-  Services: ['Public Appearances', 'Private Events', 'Brand Partnerships', 'Booking Process', 'Request Quote'],
-  Legal: ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'Disclaimer', 'Contact'],
+  Explore: ['Home', 'About', 'Services', 'Testimonials', 'Account'],
+  Services: ['Consulting', 'Mentorship', 'Brand Partnerships', 'Booking Process', 'Request Quote'],
+  Legal: ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'Disclaimer'],
   Connect: ['Instagram', 'Twitter', 'Facebook', 'LinkedIn', 'YouTube'],
-  Support: ['Contact us', 'Help center', 'FAQ', 'Booking help', 'Membership help'],
+  Support: ['Contact us', 'Help center', 'FAQ',],
   Account: ['Login', 'Sign up', 'Reset password', 'Profile settings', 'Logout'],
 }
 

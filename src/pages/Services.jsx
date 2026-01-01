@@ -5,7 +5,7 @@ import Footer from '../pages/Footer'
 const Services = () => {
   return (
     <>
-    <div className="min-h-screen bg-gray-50 py-16 md:-ml-7 -ml-6">
+    <div className="min-h-screen bg-gray-50 py-16 -mb-50 md:-ml-7 -ml-6">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-10">
           <p className="text-sm text-gray-500">Core</p>

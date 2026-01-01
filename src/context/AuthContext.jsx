@@ -23,15 +23,16 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   // Signup
-  // Pass an email redirect so confirmation links point back to the current site
+  // Use an env var for redirects so staging/production can differ from local dev
   // NOTE: Also add your production URL to Supabase Auth redirect URLs / SITE_URL in the dashboard
   const signup = async (email, password) => {
+    const redirectTo = import.meta.env.VITE_REDIRECT_URL || window.location.origin;
     const { data, error } = await supabase.auth.signUp(
       { email, password },
-      { options: { emailRedirectTo: window.location.origin } }
+      { options: { emailRedirectTo: redirectTo } }
     );
     return { data, error };
-  };
+  }
 
   // Login
   const login = async (email, password) => {

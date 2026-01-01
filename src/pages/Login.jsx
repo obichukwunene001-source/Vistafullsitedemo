@@ -25,7 +25,13 @@ const Login = () => {
   };
 
   const handleGoogleLogin = async () => {
-    await loginWithGoogle();
+    setLoading(true);
+    const { error } = await loginWithGoogle();
+    setLoading(false);
+    if (error) {
+      alert(error.message);
+    }
+    // On success Supabase will redirect to Google and then back to our app
   };
 
   return (
@@ -87,9 +93,11 @@ const Login = () => {
                 type="button"
                 onClick={handleGoogleLogin}
                 className="mt-3 w-full border border-orange-300 rounded-full py-3 flex items-center justify-center gap-3 bg-white"
+                disabled={loading}
+                aria-busy={loading}
               >
                 <img src={google} alt="Google" className="w-5 h-5" />
-                Continue with Google
+                {loading ? "Redirecting..." : "Continue with Google"}
               </button>
 
               <p className="text-center text-sm text-gray-600 mt-4">
